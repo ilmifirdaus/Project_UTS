@@ -23,7 +23,7 @@ public class MinumanFragment extends Fragment {
         MinumanViewModel =
                 ViewModelProviders.of(this).get(MinumanViewModel.class);
         View root = inflater.inflate(R.layout.fragment_minuman, container, false);
-        final TextView textView = root.findViewById(R.id.text_minuman);
+        final TextView textView = root.findViewById(R.id.text_title);
         MinumanViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
