@@ -1,35 +1,26 @@
 package id.ac.polinema.dapurku.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
 import id.ac.polinema.dapurku.R;
-import id.ac.polinema.dapurku.adapter.MenuAdapter;
 import id.ac.polinema.dapurku.model.ModelResep;
 
 public class DetailActivity extends AppCompatActivity {
-    public static final String TRANSACTION_KEY = "TRANSACTION";
-    public static final String INDEX_KEY = "INDEX";
-    public static final int INSERT_REQUEST = 1;
-    public static final int UPDATE_REQUEST = 2;
 
-    public MenuAdapter menuAdapter;
-    public RecyclerView recyclerView;
-    public ArrayList<ModelResep> dataModelArrayList = new ArrayList<ModelResep>();
+    TextView deskripsi;
+    TextView berat_awal;
+    TextView berat_akhir;
+
+    String desc, start, result;
 
     WebView webView1;
 
@@ -37,6 +28,19 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        deskripsi = findViewById(R.id.text_description);
+        berat_awal = findViewById(R.id.text_start);
+        berat_akhir = findViewById(R.id.text_result);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivity.this, NoteActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -49,4 +53,20 @@ public class DetailActivity extends AppCompatActivity {
         webView1 = findViewById(R.id.webView1);
         webView1.loadUrl("file:///android_asset/" + data.getKonten());
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                desc = data.getStringExtra("desc");
+                start = data.getStringExtra("start");
+                result = data.getStringExtra("result");
+
+                deskripsi.setText(desc);
+                berat_awal.setText(start);
+                berat_akhir.setText(result);
+            }
+        }
     }
+}

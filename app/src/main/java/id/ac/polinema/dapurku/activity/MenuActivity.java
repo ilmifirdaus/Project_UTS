@@ -4,15 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+
+
 import java.util.ArrayList;
 
 import id.ac.polinema.dapurku.R;
@@ -29,7 +23,6 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
 
         inputData("Hari 1", "Hari_1.html");
         inputData("Hari 2", "Hari_2.html");
@@ -79,4 +72,6 @@ public class MenuActivity extends AppCompatActivity {
         dataModel.setViewType(1);
         dataModelArrayList.add(dataModel);
     }
+
+
 }
